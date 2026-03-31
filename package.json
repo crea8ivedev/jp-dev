@@ -5,7 +5,8 @@
   "scripts": {
     "format": "prettier --write snippets/ templates/ sections/ layout/ config/ assets/",
     "lint": "eslint . --ext .js",
-    "prepare": "husky"
+    "prepare": "husky",
+    "build": "npx @tailwindcss/cli -i css/application.css -o assets/application.css.liquid -w -m"
   },
   "lint-staged": {
     "*.js": "eslint --fix",
