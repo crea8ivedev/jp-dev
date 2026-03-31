@@ -17,6 +17,10 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
+
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -55,6 +59,33 @@
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
+
+      @font-face {
+        font-family: 'Roc Grotesk';
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+        src: url('{{ 'roc-grotesk-regular.woff2' | asset_url }}') format('woff2'),
+             url('{{ 'roc-grotesk-regular.woff' | asset_url }}') format('woff');
+      }
+
+      @font-face {
+        font-family: 'Roc Grotesk';
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+        src: url('{{ 'roc-grotesk-medium.woff2' | asset_url }}') format('woff2'),
+             url('{{ 'roc-grotesk-medium.woff' | asset_url }}') format('woff');
+      }
+
+      @font-face {
+        font-family: 'Adieu';
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+        src: url('{{ 'adieu-regular.woff2' | asset_url }}') format('woff2'),
+             url('{{ 'adieu-regular.woff' | asset_url }}') format('woff');
+      }
 
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}

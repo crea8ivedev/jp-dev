@@ -471,6 +471,113 @@ GOOD:
 
 ---
 
+---
+
+## MANDATORY PADDING SYSTEM (DYNAMIC + SCOPED)
+
+Every section MUST implement padding using a UNIQUE, section-scoped class.
+
+Do NOT use static/global class names.
+
+---
+
+### CSS IMPLEMENTATION (REQUIRED)
+
+<style>
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  }
+</style>
+
+---
+
+### HTML USAGE (REQUIRED)
+
+<div class="section-{{ section.id }}-padding">
+  <!-- section content -->
+</div>
+
+---
+
+### SCHEMA IMPLEMENTATION (REQUIRED)
+
+{
+"type": "header",
+"content": "Desktop Padding"
+},
+{
+"type": "range",
+"id": "padding_top",
+"min": 0,
+"max": 100,
+"step": 5,
+"unit": "px",
+"label": "Padding top (desktop)",
+"default": 40
+},
+{
+"type": "range",
+"id": "padding_bottom",
+"min": 0,
+"max": 100,
+"step": 5,
+"unit": "px",
+"label": "Padding bottom (desktop)",
+"default": 55
+},
+{
+"type": "header",
+"content": "Mobile Padding"
+},
+{
+"type": "range",
+"id": "padding_top_mobile",
+"min": 0,
+"max": 100,
+"step": 5,
+"unit": "px",
+"label": "Padding top (mobile)",
+"default": 40
+},
+{
+"type": "range",
+"id": "padding_bottom_mobile",
+"min": 0,
+"max": 100,
+"step": 5,
+"unit": "px",
+"label": "Padding bottom (mobile)",
+"default": 55
+}
+
+---
+
+## ENFORCEMENT RULES
+
+- Class name MUST include: `section.id`
+- CSS MUST be wrapped inside `<style>` in section file
+- Padding MUST be controlled only via schema
+- Mobile + desktop BOTH required
+
+---
+
+## STRICTLY AVOID
+
+❌ Static classes (e.g., `.padding-section`)  
+❌ Reusing same class across sections  
+❌ Inline style padding  
+❌ Missing mobile padding
+
+---
+
 ## HOW TO USE THIS FILE
 
 When prompting Claude:

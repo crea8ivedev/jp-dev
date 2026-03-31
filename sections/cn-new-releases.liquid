@@ -1,0 +1,306 @@
+<style>
+  .cn-new-releases {
+    background: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.75rem;
+    padding-left: 3.75rem;
+    padding-right: 3.75rem;
+  }
+
+  .cn-new-releases__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.75rem;
+    width: 100%;
+  }
+
+  .cn-new-releases__title-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    font-family: 'Roc Grotesk', sans-serif;
+    font-size: 6rem;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .cn-new-releases__title-accent {
+    color: #e18131;
+  }
+
+  .cn-new-releases__title-main {
+    color: #000;
+  }
+
+  .cn-new-releases__description {
+    font-family: 'Roc Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #000;
+    opacity: 0.5;
+    text-align: center;
+    max-width: 87.5rem;
+    margin: 0;
+  }
+
+  .cn-new-releases__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.875rem;
+    width: 100%;
+  }
+
+  .cn-new-releases__image-viewport {
+    width: 100%;
+    height: 44.625rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .cn-new-releases__image-viewport img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cn-new-releases__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-family: 'Roc Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.25;
+    color: #e18131;
+    transition: opacity 0.2s ease;
+  }
+
+  .cn-new-releases__cta:hover {
+    opacity: 0.75;
+  }
+
+  .cn-new-releases__cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .cn-new-releases__cta-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media screen and (max-width: 989px) {
+    .cn-new-releases {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      gap: 2.5rem;
+    }
+
+    .cn-new-releases__title-wrap {
+      font-size: 3.5rem;
+    }
+
+    .cn-new-releases__description {
+      font-size: 1.375rem;
+    }
+
+    .cn-new-releases__image-viewport {
+      height: 28rem;
+    }
+
+    .cn-new-releases__cta {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .cn-new-releases {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      gap: 2rem;
+    }
+
+    .cn-new-releases__title-wrap {
+      font-size: 2.25rem;
+      gap: 0.5rem;
+    }
+
+    .cn-new-releases__description {
+      font-size: 1.125rem;
+    }
+
+    .cn-new-releases__image-viewport {
+      height: 18rem;
+    }
+
+    .cn-new-releases__cta {
+      font-size: 1.25rem;
+    }
+  }
+</style>
+
+{%- style -%}
+  #cn-new-releases-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media screen and (max-width: 989px) {
+    #cn-new-releases-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="cn-new-releases" id="cn-new-releases-{{ section.id }}">
+  <div class="cn-new-releases__header">
+    <div class="cn-new-releases__title-wrap">
+      <span class="cn-new-releases__title-accent">{{ section.settings.title_accent }}</span>
+      <span class="cn-new-releases__title-main">{{ section.settings.title_main }}</span>
+    </div>
+
+    {%- if section.settings.description != blank -%}
+      <p class="cn-new-releases__description">{{ section.settings.description }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="cn-new-releases__body">
+    {%- if section.settings.featured_image != blank -%}
+      <div class="cn-new-releases__image-viewport">
+        <img
+          src="{{ section.settings.featured_image | image_url: width: 1920 }}"
+          srcset="
+            {{ section.settings.featured_image | image_url: width: 750 }} 750w,
+            {{ section.settings.featured_image | image_url: width: 1100 }} 1100w,
+            {{ section.settings.featured_image | image_url: width: 1500 }} 1500w,
+            {{ section.settings.featured_image | image_url: width: 1920 }} 1920w
+          "
+          sizes="100vw"
+          alt="{{ section.settings.featured_image.alt | escape }}"
+          width="{{ section.settings.featured_image.width }}"
+          height="{{ section.settings.featured_image.height }}"
+          loading="lazy"
+        >
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank and section.settings.button_url != blank -%}
+      <a class="cn-new-releases__cta" href="{{ section.settings.button_url }}">
+        {{- section.settings.button_label -}}
+        <span class="cn-new-releases__cta-icon" aria-hidden="true">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.25 14H22.75M22.75 14L15.75 7M22.75 14L15.75 21" stroke="#e18131" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "CN New Releases",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_accent",
+      "label": "Title — accent word",
+      "default": "New"
+    },
+    {
+      "type": "text",
+      "id": "title_main",
+      "label": "Title — main word",
+      "default": "Releases"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Decorate your home with beautiful and impressive limited edition artwork prints that are expertly produced to transform the look of any room."
+    },
+    {
+      "type": "image_picker",
+      "id": "featured_image",
+      "label": "Featured image"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View All"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding top (desktop)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding bottom (desktop)",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Mobile Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding top (mobile)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding bottom (mobile)",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "CN New Releases"
+    }
+  ]
+}
+{% endschema %}

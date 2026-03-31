@@ -5,6 +5,118 @@
 {{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 
+<style>
+  /* ── CN Design System — Footer typography ── */
+
+  .footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+    background: #fff;
+  }
+
+  .footer-block__heading {
+    font-family: 'Roc Grotesk', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #000;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .footer-block__details-content,
+  .footer-block__details-content p,
+  .footer-block__details-content a {
+    font-family: 'Roc Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  .footer .list-menu__item--link,
+  .footer .link--text {
+    font-family: 'Roc Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: rgba(0, 0, 0, 0.65);
+    text-decoration: none;
+  }
+
+  .footer .list-menu__item--link:hover,
+  .footer .link--text:hover {
+    color: #000;
+  }
+
+  .footer__newsletter .footer-block__heading {
+    font-size: 1.125rem;
+  }
+
+  .footer .field__input,
+  .footer .field__label {
+    font-family: 'Roc Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .footer__copyright,
+  .footer__copyright small,
+  .footer__copyright a {
+    font-family: 'Roc Grotesk', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.45);
+    line-height: 1.5;
+  }
+
+  .footer__copyright a:hover {
+    color: #000;
+  }
+
+  /* CN logo in footer (if brand_information block is used) */
+  .footer-block__brand-info .cn-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #000;
+    text-decoration: none;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-block__brand-info .cn-logo__top {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .footer-block__brand-info .cn-logo__bracket {
+    width: 56px;
+    height: 44px;
+    flex-shrink: 0;
+    border-left: 2.4px solid #000;
+    border-right: 2.4px solid #000;
+    border-bottom: 2.4px solid #000;
+  }
+
+  .footer-block__brand-info .cn-logo__brand {
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: normal;
+    white-space: nowrap;
+  }
+
+  .footer-block__brand-info .cn-logo__name {
+    font-family: 'Adieu', sans-serif;
+    font-size: 9px;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+</style>
+
 {%- style -%}
   .footer {
     margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;

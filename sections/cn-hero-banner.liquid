@@ -1,0 +1,275 @@
+<style>
+  .cn-hero-banner {
+    background: #fff;
+  }
+
+  .cn-hero-banner__intro {
+    padding: 4rem 0 3rem 13.5rem;
+  }
+
+  .cn-hero-banner__subheading {
+    font-family: 'Lato', sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: #000;
+    text-transform: uppercase;
+    margin: 0 0 1rem;
+    line-height: 1;
+  }
+
+  .cn-hero-banner__heading {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .cn-hero-banner__heading-text {
+    font-family: 'Roc Grotesk', sans-serif;
+    font-size: 6rem;
+    font-weight: 500;
+    color: #000;
+    margin: 0;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .cn-hero-banner__image-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .cn-hero-banner__image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cn-hero-banner__quote-wrapper {
+    background: #fff;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  .cn-hero-banner__quote {
+    font-family: 'Roc Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.25;
+    color: #000;
+    max-width: 1100px;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 989px) {
+    .cn-hero-banner__intro {
+      padding: 3rem 2rem 2rem;
+    }
+
+    .cn-hero-banner__subheading {
+      font-size: 1.25rem;
+    }
+
+    .cn-hero-banner__heading-text {
+      font-size: 3rem;
+    }
+
+    .cn-hero-banner__quote-wrapper {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .cn-hero-banner__quote {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .cn-hero-banner__intro {
+      padding: 2rem 1.5rem 1.5rem;
+    }
+
+    .cn-hero-banner__subheading {
+      font-size: 1rem;
+    }
+
+    .cn-hero-banner__heading-text {
+      font-size: 2rem;
+    }
+
+    .cn-hero-banner__quote-wrapper {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .cn-hero-banner__quote {
+      font-size: 1.125rem;
+    }
+  }
+</style>
+
+{%- style -%}
+  #cn-hero-banner-{{ section.id }} .cn-hero-banner__intro {
+    padding-top: {{ section.settings.padding_top }}px;
+  }
+  #cn-hero-banner-{{ section.id }} .cn-hero-banner__quote-wrapper {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media screen and (max-width: 989px) {
+    #cn-hero-banner-{{ section.id }} .cn-hero-banner__intro {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+    }
+    #cn-hero-banner-{{ section.id }} .cn-hero-banner__quote-wrapper {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="cn-hero-banner" id="cn-hero-banner-{{ section.id }}">
+  {%- if section.settings.subheading != blank
+    or section.settings.heading_image != blank
+    or section.settings.heading_text != blank
+  -%}
+    <div class="cn-hero-banner__intro">
+      {%- if section.settings.subheading != blank -%}
+        <p class="cn-hero-banner__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading_image != blank -%}
+        <img
+          class="cn-hero-banner__heading"
+          src="{{ section.settings.heading_image | image_url: width: 1402 }}"
+          alt="{{ section.settings.heading_image.alt | escape }}"
+          width="{{ section.settings.heading_image.width }}"
+          height="{{ section.settings.heading_image.height }}"
+          loading="eager"
+        >
+      {%- elsif section.settings.heading_text != blank -%}
+        <h1 class="cn-hero-banner__heading-text">{{ section.settings.heading_text }}</h1>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.hero_image != blank -%}
+    <div class="cn-hero-banner__image-wrapper">
+      <img
+        src="{{ section.settings.hero_image | image_url: width: 1920 }}"
+        srcset="
+          {{ section.settings.hero_image | image_url: width: 750 }} 750w,
+          {{ section.settings.hero_image | image_url: width: 1100 }} 1100w,
+          {{ section.settings.hero_image | image_url: width: 1500 }} 1500w,
+          {{ section.settings.hero_image | image_url: width: 1920 }} 1920w
+        "
+        sizes="100vw"
+        alt="{{ section.settings.hero_image.alt | escape }}"
+        width="{{ section.settings.hero_image.width }}"
+        height="{{ section.settings.hero_image.height }}"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.quote != blank -%}
+    <div class="cn-hero-banner__quote-wrapper">
+      <p class="cn-hero-banner__quote">{{ section.settings.quote }}</p>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "CN Hero Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub-heading",
+      "default": "FINE ART BY"
+    },
+    {
+      "type": "image_picker",
+      "id": "heading_image",
+      "label": "Heading image",
+      "info": "Upload the artist name as an image (e.g. the custom lettered 'Christian Nørgaard' SVG). If provided, this takes priority over the heading text below."
+    },
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "Heading text (fallback)",
+      "default": "Christian Nørgaard",
+      "info": "Used only when no heading image is uploaded."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,\""
+    },
+    {
+      "type": "header",
+      "content": "Desktop Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding top (desktop)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding bottom (desktop)",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Mobile Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding top (mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding bottom (mobile)",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "CN Hero Banner"
+    }
+  ]
+}
+{% endschema %}

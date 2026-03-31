@@ -74,6 +74,92 @@
       padding-top: 0.5rem;
     }
   }
+
+  /* ── CN Design System overrides ── */
+
+  .header-wrapper--border-bottom {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+  }
+
+  @media screen and (min-width: 990px) {
+    .header {
+      padding: 16px 3.75rem !important;
+    }
+  }
+
+  /* Nav links */
+  .header__inline-menu .header__menu-item {
+    font-family: 'Roc Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 34px;
+    color: #000;
+  }
+
+  .header__inline-menu .list-menu--inline {
+    gap: 30px;
+  }
+
+  /* Icon group */
+  .header__icons {
+    gap: 16px;
+  }
+
+  .header__icon,
+  .header__icon svg {
+    color: #000;
+    width: 24px;
+    height: 24px;
+  }
+
+  .header__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  /* CN logo */
+  .cn-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #000;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .cn-logo__top {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .cn-logo__bracket {
+    width: 76px;
+    height: 59px;
+    flex-shrink: 0;
+    border-left: 3.2px solid #000;
+    border-right: 3.2px solid #000;
+    border-bottom: 3.2px solid #000;
+  }
+
+  .cn-logo__brand {
+    font-family: 'Lato', sans-serif;
+    font-size: 15.965px;
+    font-weight: 400;
+    line-height: normal;
+    white-space: nowrap;
+  }
+
+  .cn-logo__name {
+    font-family: 'Adieu', sans-serif;
+    font-size: 12.24px;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
 </style>
 
 {%- style -%}
@@ -172,7 +258,13 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <span class="cn-logo">
+            <span class="cn-logo__top">
+              <span class="cn-logo__bracket" aria-hidden="true"></span>
+              <span class="cn-logo__brand">FINE ART</span>
+            </span>
+            <span class="cn-logo__name">Christian Nørgaard</span>
+          </span>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -215,7 +307,13 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <span class="cn-logo">
+            <span class="cn-logo__top">
+              <span class="cn-logo__bracket" aria-hidden="true"></span>
+              <span class="cn-logo__brand">FINE ART</span>
+            </span>
+            <span class="cn-logo__name">Christian Nørgaard</span>
+          </span>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -260,7 +358,10 @@
               {%- if customer and customer.has_avatar? -%}
                 {{ customer | avatar }}
               {%- else -%}
-                <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+                <span class="svg-wrapper">
+                  {% comment %} {{ 'icon-account.svg' | inline_asset_content }} {% endcomment %}
+                  {% render 'icon-account' %}
+                </span>
               {%- endif -%}
             </account-icon>
           {%- else -%}
@@ -287,9 +388,15 @@
 
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
         {% if cart == empty %}
-          <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
+          <span class="svg-wrapper">
+            {% comment %} {{ 'icon-cart-empty.svg' | inline_asset_content }} {% endcomment %}
+            {% render 'icon-cart' %}
+          </span>
         {% else %}
-          <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+          <span class="svg-wrapper">
+            {% comment %} {{ 'icon-cart.svg' | inline_asset_content }} {% endcomment %}
+            {% render 'icon-cart' %}
+          </span>
         {% endif %}
         <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
         {%- if cart != empty -%}
